@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sergiu.heapupboxgame.SceneController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="335.0">
+            <image>
+                <Image url="@../../../img/home-screen-background.jpg" />
+            </image>
+        </ImageView>
+        <ImageView layoutX="73.0" layoutY="14.0" preserveRatio="true">
+            <image>
+                <Image url="@../../../img/HeapUpBoxLogo.png" />
+            </image>
+            <effect>
+                <Bloom />
+            </effect>
+        </ImageView>
+      <Button layoutX="205.0" layoutY="526.0" mnemonicParsing="false" onAction="#switchToHomeScreen" text="Home" textAlignment="CENTER">
+         <font>
+             <Font name="Bodoni MT Bold" size="30.0" />
+         </font>
+      </Button>
+      <VBox alignment="CENTER_RIGHT" layoutX="42.0" layoutY="155.0" prefHeight="290.0" prefWidth="252.0" spacing="20.0">
+         <children>
+            <ButtonBar buttonMinWidth="55.0" buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="30.0" prefWidth="262.0">
+               <buttons>
+                  <Button fx:id="zero" mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="0">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="one" mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="1">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="two" mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="2">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="3">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="24.0" />
+                     </font>
+                  </Button>
+               </buttons>
+            </ButtonBar>
+            <ButtonBar buttonMinWidth="55.0" buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="30.0" prefWidth="262.0">
+               <buttons>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="4">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="5">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="6">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="7">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+               </buttons>
+            </ButtonBar>
+            <ButtonBar buttonMinWidth="55.0" buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="30.0" prefWidth="262.0">
+               <buttons>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="8">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="9" textAlignment="CENTER">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="10" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="11">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+               </buttons>
+            </ButtonBar>
+            <ButtonBar buttonMinWidth="55.0" buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="30.0" prefWidth="262.0">
+               <buttons>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="12">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="13">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="14">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToLevel" prefHeight="50.0" prefWidth="50.0" text="15">
+                     <font>
+                        <Font name="Bodoni MT Bold" size="23.0" />
+                     </font>
+                  </Button>
+               </buttons>
+            </ButtonBar>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>
