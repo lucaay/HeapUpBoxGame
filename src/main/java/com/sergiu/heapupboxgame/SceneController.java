@@ -9,7 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SceneController {
 
@@ -31,13 +37,20 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
-    public void switchToLevel(ActionEvent event) throws IOException {
-        Object node = event.getSource(); //returns the object that generated the event
-        //since the returned object is a Button you can cast it to one
+    public void switchToLevel(ActionEvent event) throws IOException, URISyntaxException {
+        Object node = event.getSource();
         Button b = (Button)node;
         int level = Integer.parseInt(b.getText());
-        root = FXMLLoader.load(getClass().getResource("levels/level-" + level + ".fxml"));
+
+        Object selectedLevel = getClass().getResource("levels/level-" + level+ "/level-" + level + ".fxml");
+        String defaultLevel = "levels/level-0/level-0.fxml";
+        if (selectedLevel == null) {
+            root = FXMLLoader.load(getClass().getResource(defaultLevel));
+        } else {
+            root = FXMLLoader.load(getClass().getResource("levels/level-" + level+ "/level-" + level + ".fxml"));
+        }
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setResizable(false);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
