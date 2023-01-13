@@ -12,10 +12,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class SceneController {
 
@@ -54,11 +50,14 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
-    public void switchToLevel(ActionEvent event) throws IOException, URISyntaxException {
+
+    public int getCurrentLevel(ActionEvent event){
         Object node = event.getSource();
         Button b = (Button)node;
-        int level = Integer.parseInt(b.getText());
-
+        return Integer.parseInt(b.getText());
+    }
+    public void switchToLevel(ActionEvent event) throws IOException, URISyntaxException {
+        int level  = getCurrentLevel(event);
         Object selectedLevel = getClass().getResource("levels/level-" + level+ "/level-" + level + ".fxml");
         String defaultLevel = "levels/level-0/level-0.fxml";
         if (selectedLevel == null) {
