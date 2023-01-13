@@ -23,15 +23,32 @@ public class SceneController {
     private Scene scene;
     private Parent root;
 
-    public void switchToLevelSelector(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("level-selector-screen.fxml"));
+
+    @FXML
+    private void handleSwitchToLevelSelectorAction(ActionEvent event) throws IOException {
+        switchToLevelSelector(event, "level-selector-screen.fxml");
+    }
+    public void switchToLevelSelector(ActionEvent event, String pathToLevelSelector) throws IOException {
+        Object toLoad = getClass().getResource(pathToLevelSelector);
+        if ( toLoad == null ) {
+            toLoad = getClass().getResource("level-selector-screen.fxml");
+        }
+        root = FXMLLoader.load((URL) toLoad);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    public void switchToHomeScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("home-screen.fxml"));
+    @FXML
+    private void handleSwitchToHomeScreenAction(ActionEvent event) throws IOException {
+        switchToHomeScreen(event, "home-screen.fxml");
+    }
+    public void switchToHomeScreen(ActionEvent event, String pathToHomeScreen) throws IOException {
+        Object toLoad = getClass().getResource(pathToHomeScreen);
+        if (toLoad == null) {
+            toLoad = getClass().getResource("home-screen.fxml");
+        }
+        root = FXMLLoader.load((URL) toLoad);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

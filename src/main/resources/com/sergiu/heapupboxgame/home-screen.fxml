@@ -23,7 +23,7 @@
             <Bloom />
          </effect>
       </ImageView>
-      <Button layoutX="77.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToLevelSelector" text="Start Game" textAlignment="CENTER">
+      <Button layoutX="77.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleSwitchToLevelSelectorAction" text="Start Game" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT Bold" size="30.0" />
          </font>

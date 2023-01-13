@@ -1,13 +1,16 @@
 package com.sergiu.heapupboxgame.Controllers;
 
 import com.sergiu.heapupboxgame.SceneController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class Level_0_Controller {
+import java.io.IOException;
 
-    @FXML
-    private SceneController SceneController;
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+public class Level_0_Controller extends SceneController {
+
+        @FXML
+        public void switchToLevelSelector(ActionEvent event) throws IOException {
+            super.switchToLevelSelector(event, "/com/sergiu/heapupboxgame/level-selector-screen.fxml");
+        }
+
 }
