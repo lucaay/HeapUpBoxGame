@@ -44,7 +44,7 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-                <Button layoutX="247.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchToLevelSelector" styleClass="giveUpButton" stylesheets="@../../../../../css/level.css" text="Give up" textAlignment="CENTER">
+                <Button layoutX="247.0" layoutY="17.0" mnemonicParsing="false" onAction="#giveUpConfirmation" styleClass="giveUpButton" stylesheets="@../../../../../css/level.css" text="Give up" textAlignment="CENTER">
                     <font>
                         <Font name="Bodoni MT Bold" size="16.0" />
                     </font>
@@ -59,6 +59,26 @@
                         <Font name="Bodoni MT Bold" size="20.0" />
                     </font>
                 </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="giveUpConfirmation" layoutX="20.0" layoutY="200.0" prefHeight="200.0" prefWidth="296.0" styleClass="giveUpConfirmation" stylesheets="@../../../../../css/level.css" visible="false">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="giveUpConfirmation" width="296.0" />
+                <Label layoutX="11.0" layoutY="14.0" prefHeight="64.0" prefWidth="275.0" text="Are you sure you want to give up?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <font>
+                        <Font name="Consolas Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Button fx:id="gvieUpYesButton" layoutX="50.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveUpYesAction" prefHeight="48.0" prefWidth="50.0" styleClass="yesButton" stylesheets="@../../../../../css/level.css" textAlignment="CENTER">
+                    <font>
+                        <Font name="Consolas Bold" size="24.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gvieUpNoButton" layoutX="200.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveUpNoAction" prefHeight="48.0" prefWidth="50.0" styleClass="noButton" stylesheets="@../../../../../css/level.css" textAlignment="CENTER">
+                    <font>
+                        <Font name="Consolas Bold" size="24.0" />
+                    </font>
+                </Button>
             </children>
         </Pane>
     </children>
