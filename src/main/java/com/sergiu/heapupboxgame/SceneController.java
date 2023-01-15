@@ -1,5 +1,6 @@
 package com.sergiu.heapupboxgame;
 
+import com.almasb.fxgl.audio.Audio;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,10 @@ public class SceneController {
     private Scene scene;
     private Parent root;
 
+    AudioController startButtonSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/start_001.wav");
+    AudioController clickButtonSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/click_001.wav");
+    AudioController confirmationSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
+
 
     @FXML
     private void handleSwitchToLevelSelectorAction(ActionEvent event) throws IOException {
@@ -35,6 +40,7 @@ public class SceneController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        startButtonSound.play();
     }
     @FXML
     private void handleSwitchToHomeScreenAction(ActionEvent event) throws IOException {
@@ -50,6 +56,7 @@ public class SceneController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        clickButtonSound.play();
     }
 
     public int getCurrentLevel(ActionEvent event){
@@ -71,6 +78,7 @@ public class SceneController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        clickButtonSound.play();
     }
 
     public void reloadScene(ActionEvent event, String fxmlFile) throws IOException {
@@ -86,5 +94,6 @@ public class SceneController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        confirmationSound.play();
     }
 }
