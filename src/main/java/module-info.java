@@ -4,6 +4,8 @@ module com.sergiu.heapupboxgame {
 
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires javafx.media;
+    requires java.desktop;
 
     opens com.sergiu.heapupboxgame to javafx.fxml;
     opens com.sergiu.heapupboxgame.Controllers to javafx.fxml;
