@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -63,7 +64,7 @@ public class SceneController {
         if (selectedLevel == null) {
             root = FXMLLoader.load(getClass().getResource(defaultLevel));
         } else {
-            root = FXMLLoader.load(getClass().getResource("levels/level-" + level+ "/level-" + level + ".fxml"));
+            root = FXMLLoader.load((URL) selectedLevel);
         }
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setResizable(false);
@@ -72,15 +73,17 @@ public class SceneController {
         stage.show();
     }
 
-    public void reloadScene(String fxmlFile) {
+    public void reloadScene(ActionEvent event, String fxmlFile) throws IOException {
         Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(fxmlFile));
-        } catch (IOException e) {
-            e.printStackTrace();
+        Object selectedLevel = getClass().getResource(fxmlFile);
+        if (selectedLevel == null) {
+            root = FXMLLoader.load(getClass().getResource("level-selector-screen.fxml"));
+        } else {
+            root = FXMLLoader.load((URL) selectedLevel);
         }
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) root.getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setResizable(false);
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

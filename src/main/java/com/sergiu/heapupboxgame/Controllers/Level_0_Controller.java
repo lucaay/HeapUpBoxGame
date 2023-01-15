@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -29,14 +28,15 @@ public class Level_0_Controller extends SceneController {
     Timeline timeline = new Timeline();
 
     @FXML
-    public void switchToLevelSelector(ActionEvent event) throws IOException {
+    private void switchToLevelSelector(ActionEvent event) throws IOException {
         super.switchToLevelSelector(event, "/com/sergiu/heapupboxgame/level-selector-screen.fxml");
     }
 
-    @Override
-    public void reloadScene(String fxmlFile) {
-        super.reloadScene(fxmlFile);
+    @FXML
+    private void reloadCurrentScene(ActionEvent event, String pathToCurrentScene) throws IOException {
+        super.reloadScene(event, pathToCurrentScene);
     }
+
 
     @FXML
     private void giveUpConfirmation(ActionEvent event) throws IOException {
@@ -64,6 +64,7 @@ public class Level_0_Controller extends SceneController {
         timerLabel = label;
         timerLabel.setTextFill(Color.GREEN);
         timerLabel.setText("00");
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -80,6 +81,7 @@ public class Level_0_Controller extends SceneController {
                     GameOver();
                     timerLabel.setTextFill(Color.RED);
                 }
+                System.out.println(seconds);
             }
         }));
         timeline.play();
@@ -87,7 +89,7 @@ public class Level_0_Controller extends SceneController {
 
     @FXML
     private void gameOverRetryAction(ActionEvent event) throws IOException {
-        reloadScene("/com/sergiu/heapupboxgame/level_0.fxml");
+        reloadCurrentScene(event,"/com/sergiu/heapupboxgame/levels/level-0/level-0.fxml");
     }
     @FXML
     private void gameOverExitAction(ActionEvent event) throws IOException {
@@ -101,7 +103,6 @@ public class Level_0_Controller extends SceneController {
         System.out.println("Game Over");
     }
 
-    @FXML
     public void initialize() {
         Timer(timerLabel);
         levelIndicator.setText("Level " + getNumberFromLastPartOfPath(location.toString()));
