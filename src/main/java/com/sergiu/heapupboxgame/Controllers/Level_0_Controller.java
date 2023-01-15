@@ -3,6 +3,7 @@ package com.sergiu.heapupboxgame.Controllers;
 import com.sergiu.heapupboxgame.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -10,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -23,12 +25,29 @@ public class Level_0_Controller extends SceneController {
     private Label levelIndicator;
     @FXML
     private Label timerLabel;
+    @FXML
+    private Pane giveUpConfirmation;
     private int seconds = 0;
     Timeline timeline = new Timeline();
 
     @FXML
     public void switchToLevelSelector(ActionEvent event) throws IOException {
         super.switchToLevelSelector(event, "/com/sergiu/heapupboxgame/level-selector-screen.fxml");
+    }
+
+    @FXML
+    private void giveUpConfirmation(ActionEvent event) throws IOException {
+        timeline.stop();
+        giveUpConfirmation.setVisible(true);
+    }
+    @FXML
+    private void giveUpYesAction(ActionEvent event) throws IOException {
+        switchToLevelSelector(event);
+    }
+    @FXML
+    private void giveUpNoAction(ActionEvent event) throws IOException {
+        giveUpConfirmation.setVisible(false);
+        timeline.play();
     }
 
     private int getNumberFromLastPartOfPath(String path) {
@@ -41,14 +60,14 @@ public class Level_0_Controller extends SceneController {
     private void Timer(Label label) {
         timerLabel = label;
         timerLabel.setTextFill(Color.GREEN);
-        timerLabel.setText("00:00");
+        timerLabel.setText("00");
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 seconds++;
                 String sec = String.format("%02d", seconds);
-                timerLabel.setText("00:" + sec);
+                timerLabel.setText(sec);
                 if (seconds > 10) {
                     timerLabel.setTextFill(Color.YELLOW);
                 }
