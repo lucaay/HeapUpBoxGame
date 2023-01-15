@@ -22,7 +22,7 @@
             <Font name="Bodoni MT Bold" size="30.0" />
          </font>
       </Label>
-      <Label id="counter" fx:id="timerLabel" layoutX="14.0" layoutY="14.0" text="0">
+      <Label id="counter" fx:id="timerLabel" layoutX="14.0" layoutY="14.0" text="00:00">
          <font>
             <Font name="Bodoni MT" size="26.0" />
          </font>

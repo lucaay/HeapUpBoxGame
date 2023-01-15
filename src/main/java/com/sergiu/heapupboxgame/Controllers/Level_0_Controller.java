@@ -74,5 +74,6 @@ public class Level_0_Controller extends SceneController {
     public void initialize() {
         Timer(timerLabel);
         levelIndicator.setText("Level " + getNumberFromLastPartOfPath(location.toString()));
+
     }
 }

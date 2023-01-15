@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sergiu.heapupboxgame.SceneController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="335.0">
@@ -23,10 +22,9 @@
             <Bloom />
          </effect>
       </ImageView>
-      <Button layoutX="77.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleSwitchToLevelSelectorAction" text="Start Game" textAlignment="CENTER">
+      <Button id="startButton" fx:id="startButton" layoutX="85.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleSwitchToLevelSelectorAction" styleClass="startButton" stylesheets="@../../../css/home-screen.css" text="START GAME" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT Bold" size="30.0" />
-         </font>
-      </Button>
+            <Font name="Consolas" size="24.0" />
+         </font></Button>
    </children>
 </AnchorPane>
