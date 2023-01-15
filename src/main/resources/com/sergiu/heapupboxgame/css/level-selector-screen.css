@@ -7,7 +7,7 @@
     -fx-background-repeat: no-repeat;
 }
 
-.levelButton:hover{
+.button:hover{
     -fx-opacity: 0.85;
     -fx-cursor: hand;
 }
@@ -34,9 +34,4 @@
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
-}
-
-.homeButton:hover{
-    -fx-opacity: 0.85;
-    -fx-cursor: hand;
 }

@@ -71,4 +71,17 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void reloadScene(String fxmlFile) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }

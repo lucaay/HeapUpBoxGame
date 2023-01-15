@@ -4,14 +4,12 @@ import com.sergiu.heapupboxgame.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import javafx.scene.media.AudioClip;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,12 +23,19 @@ public class Level_0_Controller extends SceneController {
     private Label timerLabel;
     @FXML
     private Pane giveUpConfirmation;
+    @FXML
+    private Pane gameOverPane;
     private int seconds = 0;
     Timeline timeline = new Timeline();
 
     @FXML
     public void switchToLevelSelector(ActionEvent event) throws IOException {
         super.switchToLevelSelector(event, "/com/sergiu/heapupboxgame/level-selector-screen.fxml");
+    }
+
+    @Override
+    public void reloadScene(String fxmlFile) {
+        super.reloadScene(fxmlFile);
     }
 
     @FXML
@@ -80,9 +85,19 @@ public class Level_0_Controller extends SceneController {
         timeline.play();
     }
 
+    @FXML
+    private void gameOverRetryAction(ActionEvent event) throws IOException {
+        reloadScene("/com/sergiu/heapupboxgame/level_0.fxml");
+    }
+    @FXML
+    private void gameOverExitAction(ActionEvent event) throws IOException {
+        switchToLevelSelector(event);
+    }
+
     private void GameOver() {
         timeline.stop();
         timerLabel.setTextFill(Color.RED);
+        gameOverPane.setVisible(true);
         System.out.println("Game Over");
     }
 

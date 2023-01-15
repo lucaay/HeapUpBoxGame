@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -44,10 +45,14 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-              <Button layoutX="247.0" layoutY="17.0" mnemonicParsing="false" onAction="#giveUpConfirmation" styleClass="giveUpButton" stylesheets="@../../css/level.css" text="Give up" textAlignment="CENTER">
+              <Button layoutX="247.0" layoutY="17.0" mnemonicParsing="false" onAction="#giveUpConfirmation" stylesheets="@../../css/level.css" text="Give up" textAlignment="CENTER">
                   <font>
                       <Font name="Bodoni MT Bold" size="16.0" />
                   </font>
+               <styleClass>
+                  <String fx:value="giveUpButton" />
+                  <String fx:value="button" />
+               </styleClass>
               </Button>
             <Label id="counter" fx:id="timerLabel" layoutX="14.0" layoutY="17.0" text="00" textFill="#00ff2f">
                <font>
@@ -64,20 +69,56 @@
       <Pane fx:id="giveUpConfirmation" layoutX="20.0" layoutY="200.0" prefHeight="200.0" prefWidth="296.0" styleClass="giveUpConfirmation" stylesheets="@../../css/level.css" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="giveUpConfirmation" width="296.0" />
-            <Label layoutX="11.0" layoutY="14.0" prefHeight="64.0" prefWidth="275.0" text="Are you sure you want to give up?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="64.0" prefWidth="275.0" text="Are you sure you want to give up?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Consolas Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="gvieUpYesButton" layoutX="50.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveUpYesAction" prefHeight="48.0" prefWidth="50.0" styleClass="yesButton" stylesheets="@../../css/level.css" textAlignment="CENTER">
+            <Button fx:id="gvieUpYesButton" layoutX="50.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveUpYesAction" prefHeight="48.0" prefWidth="50.0" stylesheets="@../../css/level.css" textAlignment="CENTER">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="yesButton" />
+                  <String fx:value="button" />
+               </styleClass>
             </Button>
-            <Button fx:id="gvieUpNoButton" layoutX="200.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveUpNoAction" prefHeight="48.0" prefWidth="50.0" styleClass="noButton" stylesheets="@../../css/level.css" textAlignment="CENTER">
+            <Button fx:id="gvieUpNoButton" layoutX="200.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveUpNoAction" prefHeight="48.0" prefWidth="50.0" stylesheets="@../../css/level.css" textAlignment="CENTER">
                <font>
                   <Font name="Consolas Bold" size="24.0" />
                </font>
+               <styleClass>
+                  <String fx:value="noButton" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="gameOverPane" layoutX="20.0" layoutY="210.0" prefHeight="200.0" prefWidth="296.0" styleClass="giveUpConfirmation" stylesheets="@../../css/level.css" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="giveUpConfirmation" width="296.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="64.0" prefWidth="275.0" text="GAME OVER!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Consolas Bold" size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="retryButton" layoutX="14.0" layoutY="106.0" mnemonicParsing="false" onAction="#gameOverRetryAction" prefHeight="80.0" prefWidth="99.0" stylesheets="@../../css/level.css" text="RETRY" textAlignment="CENTER">
+               <font>
+                  <Font name="Consolas Bold" size="24.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="retryButton" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="106.0" mnemonicParsing="false" onAction="#gameOverExitAction" prefHeight="80.0" prefWidth="99.0" stylesheets="@../../css/level.css" text="EXIT" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Consolas Bold" size="24.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="exitButton" />
+                  <String fx:value="button" />
+               </styleClass>
             </Button>
          </children>
       </Pane>
