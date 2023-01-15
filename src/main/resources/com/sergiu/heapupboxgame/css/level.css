@@ -1,0 +1,45 @@
+.giveUpButton{
+    -fx-background-image: url("../img/buttons/start-button.png");
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.statusBar{
+    -fx-border-color: transparent;
+}
+.giveUpConfirmation{
+    -fx-background-color: red;
+    -fx-background-radius: 10px;
+}
+
+.gameOver {
+    -fx-background-color: red;
+    -fx-background-radius: 10px;
+}
+
+.button{
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.yesButton {
+    -fx-background-image: url("../img/buttons/yes-button.png");
+}
+.noButton{
+    -fx-background-image: url("../img/buttons/no-button.png");
+}
+.retryButton {
+    -fx-background-image: url("../img/buttons/type-4-level-button.png");
+}
+.exitButton{
+    -fx-background-image: url("../img/buttons/type-1-level-button.png");
+}
+.button:hover{
+    -fx-opacity: 0.85;
+    -fx-cursor: hand;
+}
