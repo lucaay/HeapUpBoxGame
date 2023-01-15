@@ -7,5 +7,6 @@ public class Level_0_Controller extends LevelController {
 
     public void initialize() {
         super.initialize(30);
+        
     }
 }
