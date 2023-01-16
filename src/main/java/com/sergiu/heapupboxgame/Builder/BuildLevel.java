@@ -1,9 +1,11 @@
 package com.sergiu.heapupboxgame.Builder;
 
+import com.sergiu.heapupboxgame.Adapter.MouseInput;
 import com.sergiu.heapupboxgame.Controllers.LevelController;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URISyntaxException;
@@ -31,25 +33,37 @@ public class BuildLevel extends LevelController {
 
         for (int i = 0; i < localNumberOfBoxes; i++) {
             Image boxImage = new Image(getClass().getResource(boxImagePath).toURI().toString());
-            ImageView imageView = new ImageView(boxImage);
-            imageView.getStyleClass().add("box");
-            imageView.setFitWidth(75);
-            imageView.setFitHeight(75);
-            imageView.setY(445);
+            ImageView box = new ImageView(boxImage);
+            box.getStyleClass().add("box");
+            box.setFitWidth(75);
+            box.setFitHeight(75);
+            box.setY(445);
             if (localNumberOfBoxes == 2) {
-                imageView.setX(50 + i * 150);
+                box.setX(50 + i * 150);
             } else if (localNumberOfBoxes == 3) {
-                imageView.setX(25 + i * 100);
+                box.setX(25 + i * 100);
             } else if (localNumberOfBoxes == 4) {
-                imageView.setX(2.5 + i * 85);
+                box.setX(2.5 + i * 85);
             } else if (localNumberOfBoxes == 5) {
-                imageView.setX(2.5 + i * 85);
+                box.setX(2.5 + i * 85);
                 if (i == (localNumberOfBoxes - 1)) {
-                    imageView.setY(350);
-                    imageView.setX(2.5);
+                    box.setY(350);
+                    box.setX(2.5);
                 }
             }
-            anchorPane.getChildren().add(imageView);
+            anchorPane.getChildren().add(box);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    MouseInput mi = new MouseInput(box);
+                    box.addEventHandler(MouseEvent.MOUSE_PRESSED, mi);
+                    box.addEventHandler(MouseEvent.MOUSE_DRAGGED, mi);
+                    box.addEventHandler(MouseEvent.MOUSE_RELEASED, mi);
+                    box.addEventHandler(MouseEvent.MOUSE_ENTERED, mi);
+                    box.addEventHandler(MouseEvent.MOUSE_EXITED, mi);
+                }
+            });
+
         }
     }
 
