@@ -14,7 +14,7 @@ public class Level_0_Controller extends LevelController {
 
     BuildLevel level = new BuildLevel();
     private int numberOfBoxes = 5; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
-    private int timerMaxSeconds = numberOfBoxes * 10; //default value, adjust the value for each level depending on the number of boxes
+    private int timerMaxSeconds = numberOfBoxes * 5; //5 seconds per box
 
     public void initialize() throws URISyntaxException {
         super.initialize(timerMaxSeconds);
