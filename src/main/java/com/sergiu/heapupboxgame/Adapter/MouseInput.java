@@ -20,8 +20,19 @@ public class MouseInput implements EventHandler<MouseEvent> {
             y = event.getSceneY() - box.getTranslateY();
             box.setCursor(Cursor.CLOSED_HAND);
         } else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-            box.setTranslateX(event.getSceneX() - x);
-            box.setTranslateY(event.getSceneY() - y);
+            double newTranslateX = event.getSceneX() - x;
+            double newTranslateY = event.getSceneY() - y;
+
+            double leftLimit = -box.getX();
+            double rightLimit = 335 - box.getX() - 75;
+            double topLimit = -box.getY() + 90; // 90 is the height of the status bar
+            double bottomLimit = 600 - 80 - 73 - box.getY(); // 80 is the height of the platform
+
+            // Check if the new X and Y positions are within the limits
+            if (newTranslateX > leftLimit && newTranslateX < rightLimit && newTranslateY > topLimit && newTranslateY < bottomLimit) {
+                box.setTranslateX(newTranslateX);
+                box.setTranslateY(newTranslateY);
+            }
         } else if (event.getEventType() == MouseEvent.MOUSE_RELEASED) {
             box.setCursor(Cursor.DEFAULT);
         } else if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
@@ -30,4 +41,5 @@ public class MouseInput implements EventHandler<MouseEvent> {
             box.setCursor(Cursor.DEFAULT);
         }
     }
+
 }

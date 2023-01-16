@@ -79,7 +79,7 @@ public class BuildLevel extends LevelController {
             @Override
             public void run() {
                 anchorPaneHeight[0] = (int) anchorPane.getHeight();
-                dottedLine.setY(anchorPaneHeight[0] - 75 * numberOfBoxes - 80 - 20); // 75 is the height of the box and -20 is the offset of the dotted line and 80 is the height of the platform
+                dottedLine.setY(anchorPaneHeight[0] - 75 * numberOfBoxes - 80 + 20); // 75 is the height of the box and 20 is the offset of the dotted line and 80 is the height of the platform
                 anchorPane.getChildren().add(dottedLine);
             }
         });
