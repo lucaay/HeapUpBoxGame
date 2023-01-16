@@ -13,7 +13,7 @@ public class Level_0_Controller extends LevelController {
     private AnchorPane mainLevelPane;
 
     BuildLevel level = new BuildLevel();
-    private int numberOfBoxes = 5; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
+    private int numberOfBoxes = 3; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
     private int timerMaxSeconds = numberOfBoxes * 5; //5 seconds per box
 
     public void initialize() throws URISyntaxException {
