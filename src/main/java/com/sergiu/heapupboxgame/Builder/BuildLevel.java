@@ -1,6 +1,7 @@
 package com.sergiu.heapupboxgame.Builder;
 
 import com.sergiu.heapupboxgame.Adapter.MouseInput;
+import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
 import com.sergiu.heapupboxgame.Controllers.LevelController;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
@@ -38,6 +39,7 @@ public class BuildLevel extends LevelController {
             box.setFitWidth(75);
             box.setFitHeight(75);
             box.setY(445);
+
             if (localNumberOfBoxes == 2) {
                 box.setX(50 + i * 150);
             } else if (localNumberOfBoxes == 3) {
@@ -52,18 +54,19 @@ public class BuildLevel extends LevelController {
                 }
             }
             anchorPane.getChildren().add(box);
+            BoxesGravity boxesGravity = new BoxesGravity(box);
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    MouseInput mi = new MouseInput(box);
+                    MouseInput mi = new MouseInput(box, boxesGravity);
                     box.addEventHandler(MouseEvent.MOUSE_PRESSED, mi);
                     box.addEventHandler(MouseEvent.MOUSE_DRAGGED, mi);
                     box.addEventHandler(MouseEvent.MOUSE_RELEASED, mi);
                     box.addEventHandler(MouseEvent.MOUSE_ENTERED, mi);
                     box.addEventHandler(MouseEvent.MOUSE_EXITED, mi);
+                    boxesGravity.startBox();
                 }
             });
-
         }
     }
 
