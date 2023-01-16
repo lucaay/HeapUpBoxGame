@@ -1,5 +1,7 @@
 package com.sergiu.heapupboxgame.Adapter;
 
+import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
@@ -8,9 +10,12 @@ import javafx.scene.input.MouseEvent;
 public class MouseInput implements EventHandler<MouseEvent> {
     private double x, y;
     private ImageView box;
+    private final BoxesGravity boxesGravity;
+    private Timeline timeline;
 
-    public MouseInput(ImageView box) {
+    public MouseInput(ImageView box, BoxesGravity boxesGravity) {
         this.box = box;
+        this.boxesGravity = boxesGravity;
     }
 
     @Override
@@ -26,7 +31,7 @@ public class MouseInput implements EventHandler<MouseEvent> {
             double leftLimit = -box.getX();
             double rightLimit = 335 - box.getX() - 75;
             double topLimit = -box.getY() + 90; // 90 is the height of the status bar
-            double bottomLimit = 600 - 80 - 73 - box.getY(); // 80 is the height of the platform
+            double bottomLimit = 600 - 80 - 70 - box.getY(); // 80 is the height of the platform
 
             // Check if the new X and Y positions are within the limits
             if (newTranslateX > leftLimit && newTranslateX < rightLimit && newTranslateY > topLimit && newTranslateY < bottomLimit) {

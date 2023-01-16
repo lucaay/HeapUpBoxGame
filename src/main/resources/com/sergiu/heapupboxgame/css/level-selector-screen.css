@@ -1,4 +1,4 @@
-.levelButton{
+.levelButton {
     -fx-text-fill: white;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -7,26 +7,29 @@
     -fx-background-repeat: no-repeat;
 }
 
-.button:hover{
+.button:hover {
     -fx-opacity: 0.85;
     -fx-cursor: hand;
 }
 
-.type1LevelButton{
+.type1LevelButton {
     -fx-background-image: url("../img/buttons/type-1-level-button.png");
 }
-.type2LevelButton{
+
+.type2LevelButton {
     -fx-background-image: url("../img/buttons/type-2-level-button.png");
 }
-.type3LevelButton{
+
+.type3LevelButton {
     -fx-background-image: url("../img/buttons/type-3-level-button.png");
 }
-.type4LevelButton{
+
+.type4LevelButton {
     -fx-background-image: url("../img/buttons/type-4-level-button.png");
 }
 
 
-.homeButton{
+.homeButton {
     -fx-background-image: url("../img/buttons/home-button.png");
     -fx-text-fill: white;
     -fx-background-color: transparent;

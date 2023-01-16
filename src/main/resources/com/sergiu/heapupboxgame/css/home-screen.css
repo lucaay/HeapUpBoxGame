@@ -1,4 +1,4 @@
-.startButton{
+.startButton {
     -fx-background-image: url("../img/buttons/start-button.png");
     -fx-text-fill: white;
     -fx-background-color: transparent;
@@ -8,7 +8,7 @@
     -fx-background-repeat: no-repeat;
 }
 
-.startButton:hover{
+.startButton:hover {
     -fx-opacity: 0.85;
     -fx-cursor: hand;
 }

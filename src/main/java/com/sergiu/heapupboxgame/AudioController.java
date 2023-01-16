@@ -1,10 +1,11 @@
 package com.sergiu.heapupboxgame;
 
 import javax.sound.sampled.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 public class AudioController {
-    private String audioFilePath;
+    private final String audioFilePath;
     private AudioInputStream audioStream;
     private AudioFormat format;
     private DataLine.Info info;
