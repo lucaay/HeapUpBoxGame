@@ -10,15 +10,18 @@
 
 .statusBar{
     -fx-border-color: transparent;
+    -fx-view-order: 5;
 }
 .giveUpConfirmation{
     -fx-background-color: red;
     -fx-background-radius: 10px;
+    -fx-view-order: 4;
 }
 
 .gameOver {
     -fx-background-color: red;
     -fx-background-radius: 10px;
+    -fx-view-order: 4;
 }
 
 .button{
@@ -42,4 +45,12 @@
 .button:hover{
     -fx-opacity: 0.85;
     -fx-cursor: hand;
+}
+
+.platform{
+    -fx-view-order: 500;
+}
+
+.box{
+    -fx-view-order: 500;
 }

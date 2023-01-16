@@ -4,7 +4,6 @@ import com.sergiu.heapupboxgame.AudioController;
 import com.sergiu.heapupboxgame.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,6 +25,8 @@ public class LevelController extends SceneController {
     private Pane giveUpConfirmation;
     @FXML
     private Pane gameOverPane;
+    @FXML
+    private Label noLevelDataLabel;
     private int seconds = 0;
     Timeline timeline = new Timeline();
     AudioController timerSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/clock-tick.wav");
@@ -33,6 +34,16 @@ public class LevelController extends SceneController {
     AudioController errorSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/error_001.wav");
     AudioController confirmationSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
     AudioController gameOverSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/game_over.wav");
+
+
+    public void levelInitialized(boolean initialized){
+        //set of instructions to be executed when the level is initialized (when the level is loaded)
+        if (initialized) {
+            noLevelDataLabel.setVisible(false);
+        }else{
+            noLevelDataLabel.setVisible(true);
+        }
+    }
 
     @FXML
     private void switchToLevelSelector(ActionEvent event) throws IOException {

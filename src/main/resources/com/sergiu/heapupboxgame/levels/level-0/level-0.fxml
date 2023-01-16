@@ -13,14 +13,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sergiu.heapupboxgame.Controllers.Level_0_Controller">
+<AnchorPane fx:id="mainLevelPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sergiu.heapupboxgame.Controllers.Level_0_Controller">
     <children>
-        <ImageView fitHeight="600.0" fitWidth="335.0">
+        <ImageView fitHeight="600.0" fitWidth="335.0" style="-fx-view-order: 999;">
             <image>
                 <Image url="@../../img/home-screen-background.jpg" />
             </image>
         </ImageView>
-      <Label layoutX="85.0" layoutY="281.0" text="No level Data">
+      <Label fx:id="noLevelDataLabel" layoutX="85.0" layoutY="281.0" style="-fx-view-order: 999;" text="No level Data" visible="false">
          <font>
             <Font name="Bodoni MT Bold" size="30.0" />
          </font>
@@ -96,7 +96,7 @@
       </Pane>
       <Pane fx:id="gameOverPane" layoutX="20.0" layoutY="210.0" prefHeight="200.0" prefWidth="296.0" scaleZ="10.0" styleClass="gameOver" stylesheets="@../../css/level.css" visible="false">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="giveUpConfirmation" width="296.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="gameOver" width="296.0" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="64.0" prefWidth="275.0" text="GAME OVER!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Consolas Bold" size="30.0" />

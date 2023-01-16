@@ -1,6 +1,5 @@
 package com.sergiu.heapupboxgame;
 
-import com.almasb.fxgl.audio.Audio;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -73,6 +71,7 @@ public class SceneController {
         } else {
             root = FXMLLoader.load((URL) selectedLevel);
         }
+        root.getStylesheets().add(getClass().getResource("/com/sergiu/heapupboxgame/css/level.css").toExternalForm());
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setResizable(false);
         scene = new Scene(root);
