@@ -1,6 +1,7 @@
 package com.sergiu.heapupboxgame.Builder;
 
 import com.sergiu.heapupboxgame.Controllers.LevelController;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -52,8 +53,29 @@ public class BuildLevel extends LevelController {
         }
     }
 
+    private void dottedLineBuilder (int numberOfBoxes, AnchorPane anchorPane) throws URISyntaxException {
+        ImageView dottedLine = new ImageView(getClass().getResource("/com/sergiu/heapupboxgame/level_items/dotted_line.png").toURI().toString());
+        dottedLine.getStyleClass().add("dottedLine");
+        dottedLine.setFitWidth(325);
+        dottedLine.setFitHeight(3);
+        dottedLine.setX(5);
+
+        final int[] anchorPaneHeight = {0};
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                anchorPaneHeight[0] = (int) anchorPane.getHeight();
+                dottedLine.setY(anchorPaneHeight[0] - 75 * numberOfBoxes - 80 - 20); // 75 is the height of the box and -20 is the offset of the dotted line and 80 is the height of the platform
+                anchorPane.getChildren().add(dottedLine);
+            }
+        });
+    }
+
+
     public void createLevel(String platformImagePath, String boxImagePath, int numberOfBoxes, AnchorPane anchorPane) throws URISyntaxException {
         PlatformBuilder(platformImagePath, anchorPane);
         BoxesBuilder(boxImagePath, numberOfBoxes, anchorPane);
+        dottedLineBuilder(numberOfBoxes, anchorPane);
+
     }
 }

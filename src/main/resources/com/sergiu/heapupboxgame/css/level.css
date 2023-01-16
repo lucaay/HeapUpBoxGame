@@ -54,3 +54,6 @@
 .box{
     -fx-view-order: 500;
 }
+.dottedLine{
+    -fx-view-order: 501;
+}
