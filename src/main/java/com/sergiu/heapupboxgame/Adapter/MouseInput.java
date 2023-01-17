@@ -32,13 +32,6 @@ public class MouseInput implements EventHandler<MouseEvent> {
             x = event.getSceneX() - box.getTranslateX();
             y = event.getSceneY() - box.getTranslateY();
             box.setCursor(Cursor.CLOSED_HAND);
-            int timelineIndex = ((ImageViewWithTimelineIndex) box).getTimelineIndex();
-            boxesGravity.getMousePressed(true, timelineIndex);
-
-//            ImageViewWithTimelineIndex[] boxWithTimelineIndex = boxesGravity.getImageViewWithTimelineIndexData();
-//            for(int i = 0; i < boxWithTimelineIndex.length; i++){
-//                boxesGravity.getMousePressed(true, i);
-//            }
         } else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
             double newTranslateX = event.getSceneX() - x;
             double newTranslateY = event.getSceneY() - y;
@@ -55,10 +48,6 @@ public class MouseInput implements EventHandler<MouseEvent> {
             }
         } else if (event.getEventType() == MouseEvent.MOUSE_RELEASED) {
             box.setCursor(Cursor.DEFAULT);
-//            ImageViewWithTimelineIndex[] boxWithTimelineIndex = boxesGravity.getImageViewWithTimelineIndexData();
-//            for(int i = 0; i < boxWithTimelineIndex.length; i++){
-//                boxesGravity.getMousePressed(false, i);
-//            }
         } else if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
             box.setCursor(Cursor.HAND);
         } else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
