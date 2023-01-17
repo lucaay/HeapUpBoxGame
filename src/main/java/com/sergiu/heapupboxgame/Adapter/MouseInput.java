@@ -1,7 +1,9 @@
 package com.sergiu.heapupboxgame.Adapter;
 
 import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
+import com.sergiu.heapupboxgame.Chain_Of_Responsibility.ImageViewWithTimelineIndex;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
@@ -10,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 public class MouseInput implements EventHandler<MouseEvent> {
     private double x, y;
     private ImageView box;
-    private final BoxesGravity boxesGravity;
+    private BoxesGravity boxesGravity = null;
     private Timeline timeline;
 
     public MouseInput(ImageView box, BoxesGravity boxesGravity) {
@@ -18,12 +20,25 @@ public class MouseInput implements EventHandler<MouseEvent> {
         this.boxesGravity = boxesGravity;
     }
 
+    public MouseInput() {
+        this.boxesGravity = null;
+    }
+
+
     @Override
     public void handle(MouseEvent event) {
+
         if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
             x = event.getSceneX() - box.getTranslateX();
             y = event.getSceneY() - box.getTranslateY();
             box.setCursor(Cursor.CLOSED_HAND);
+            int timelineIndex = ((ImageViewWithTimelineIndex) box).getTimelineIndex();
+            boxesGravity.getMousePressed(true, timelineIndex);
+
+//            ImageViewWithTimelineIndex[] boxWithTimelineIndex = boxesGravity.getImageViewWithTimelineIndexData();
+//            for(int i = 0; i < boxWithTimelineIndex.length; i++){
+//                boxesGravity.getMousePressed(true, i);
+//            }
         } else if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
             double newTranslateX = event.getSceneX() - x;
             double newTranslateY = event.getSceneY() - y;
@@ -40,6 +55,10 @@ public class MouseInput implements EventHandler<MouseEvent> {
             }
         } else if (event.getEventType() == MouseEvent.MOUSE_RELEASED) {
             box.setCursor(Cursor.DEFAULT);
+//            ImageViewWithTimelineIndex[] boxWithTimelineIndex = boxesGravity.getImageViewWithTimelineIndexData();
+//            for(int i = 0; i < boxWithTimelineIndex.length; i++){
+//                boxesGravity.getMousePressed(false, i);
+//            }
         } else if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
             box.setCursor(Cursor.HAND);
         } else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
@@ -47,4 +66,11 @@ public class MouseInput implements EventHandler<MouseEvent> {
         }
     }
 
+    public void setMouseInput(ImageView box) {
+        box.setOnMousePressed(this);
+        box.setOnMouseDragged(this);
+        box.setOnMouseReleased(this);
+        box.setOnMouseEntered(this);
+        box.setOnMouseExited(this);
+    }
 }

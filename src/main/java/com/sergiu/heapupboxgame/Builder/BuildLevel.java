@@ -16,12 +16,10 @@ public class BuildLevel extends LevelController {
     private final String platformImagePath;
     private final String boxImagePath;
     private final int numberOfBoxes;
-    private final int timerMaxSeconds;
 
-    public BuildLevel(String platformImagePath, int numberOfBoxes, int timerMaxSeconds, String boxImagePath) {
+    public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath) {
         this.platformImagePath = platformImagePath;
         this.numberOfBoxes = numberOfBoxes;
-        this.timerMaxSeconds = timerMaxSeconds;
         this.boxImagePath = boxImagePath;
     }
 
@@ -50,13 +48,13 @@ public class BuildLevel extends LevelController {
             localNumberOfBoxes = 5;
         }
 
+        ImageView[] boxes = new ImageView[localNumberOfBoxes];
         for (int i = 0; i < localNumberOfBoxes; i++) {
             ImageView box = getPath(boxImagePath);
             box.getStyleClass().add("box");
             box.setFitWidth(75);
             box.setFitHeight(75);
-//            box.setY(445);
-            box.setY(300);
+            box.setY(350);
             if (localNumberOfBoxes == 2) {
                 box.setX(50 + i * 150);
             } else if (localNumberOfBoxes == 3) {
@@ -70,9 +68,13 @@ public class BuildLevel extends LevelController {
                     box.setX(2.5);
                 }
             }
+            boxes[i] = box;
+        }
+
+        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes);
+
+        for (ImageView box: boxes) {
             mainLevelPane.getChildren().add(box);
-            ImageView platformImageView = getPath(platformImagePath);
-            BoxesGravity boxesGravity = new BoxesGravity(box, platformImageView);
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -84,8 +86,9 @@ public class BuildLevel extends LevelController {
                     box.addEventHandler(MouseEvent.MOUSE_EXITED, mi);
                 }
             });
-            boxesGravity.startBox();
+
         }
+        boxesGravity.start();
     }
 
     private void dottedLineBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
