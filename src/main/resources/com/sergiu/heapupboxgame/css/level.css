@@ -24,6 +24,11 @@
     -fx-background-radius: 10px;
     -fx-view-order: 4;
 }
+.gameWon {
+    -fx-background-color: #32ff7e;
+    -fx-background-radius: 10px;
+    -fx-view-order: 4;
+}
 
 .button {
     -fx-background-color: transparent;
