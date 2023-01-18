@@ -136,11 +136,9 @@ public abstract class LevelController extends SceneController {
 
     public void GameWon() {
         timeline.stop();
-        if ((mainLevelPane.getScene() != null) && mainLevelPane.getChildren().contains(timerLabel) && mainLevelPane.getChildren().contains(gameWonPane)) {
-            timerLabel.setTextFill(Color.GREEN);
-            gameWonSound.play();
-            gameWonPane.setVisible(true);
-        }
+        timerLabel.setTextFill(Color.GREEN);
+        gameWonSound.play();
+        gameWonPane.setVisible(true);
     }
 
     public void initialize(int timerMaxSeconds) {
