@@ -83,13 +83,13 @@ public class SceneController {
     }
 
     public void reloadScene(ActionEvent event, String fxmlFile) throws IOException {
-        Parent root = null;
         Object selectedLevel = getClass().getResource(fxmlFile);
         if (selectedLevel == null) {
             root = FXMLLoader.load(getClass().getResource("level-selector-screen.fxml"));
         } else {
             root = FXMLLoader.load((URL) selectedLevel);
         }
+        root.getStylesheets().add(getClass().getResource("/com/sergiu/heapupboxgame/css/level.css").toExternalForm());
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setResizable(false);
         scene = new Scene(root);
