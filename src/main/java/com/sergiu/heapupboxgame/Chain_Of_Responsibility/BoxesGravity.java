@@ -72,10 +72,14 @@ public class BoxesGravity {
             int finalI = i;
             boxes[i].onMousePressedProperty().set((MouseEvent event) -> {
                 stop(boxes[finalI]);
-            });
+            }); //stop the falling box when the user clicks on it
+        }
+        for (int i = 0; i < numberOfBoxes; i++) {
+            int finalI = i;
             boxes[i].onMouseReleasedProperty().set((MouseEvent event) -> {
+                velocity[finalI] = GRAVITY;
                 startGravity(boxes[finalI]);
-            });
+            }); //start the falling box when the user releases the click on it
         }
     }
 }
