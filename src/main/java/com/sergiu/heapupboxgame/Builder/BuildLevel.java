@@ -71,7 +71,7 @@ public class BuildLevel extends LevelController {
             boxes[i] = box;
         }
 
-        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes);
+        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane);
 
         for (ImageView box: boxes) {
             mainLevelPane.getChildren().add(box);
