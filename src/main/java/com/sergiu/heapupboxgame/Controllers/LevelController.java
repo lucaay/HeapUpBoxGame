@@ -22,6 +22,7 @@ public class LevelController extends SceneController {
     AudioController errorSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/error_001.wav");
     AudioController confirmationSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
     AudioController gameOverSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/game_over.wav");
+    AudioController gameWonSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
     @FXML
     private URL location;
     @FXML
@@ -32,6 +33,8 @@ public class LevelController extends SceneController {
     private Pane giveUpConfirmation;
     @FXML
     private Pane gameOverPane;
+    @FXML
+    private Pane gameWonPane;
     @FXML
     private Label noLevelDataLabel;
     private int seconds = 0;
@@ -122,6 +125,14 @@ public class LevelController extends SceneController {
         gameOverSound.play();
         gameOverPane.setVisible(true);
         System.out.println("Game Over");
+    }
+
+    public void GameWon() {
+        timeline.stop();
+        timerLabel.setTextFill(Color.GREEN);
+        gameWonSound.play();
+        gameWonPane.setVisible(true);
+        System.out.println("Game Won");
     }
 
     public void initialize(int timerMaxSeconds) {

@@ -1,83 +1,67 @@
 package com.sergiu.heapupboxgame.Chain_Of_Responsibility;
 
-import com.sergiu.heapupboxgame.Adapter.MouseInput;
+import com.sergiu.heapupboxgame.Mediator.CollisionWithOtherBox;
+import com.sergiu.heapupboxgame.Mediator.CollisionWithPlatform;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.net.URISyntaxException;
-
 public class BoxesGravity {
+    private static final double GRAVITY = 3;
     public ImageView[] boxes;
     private int numberOfBoxes;
-    private boolean mousePressed[];
-    Timeline[] timelines;
-    ImageViewWithTimelineIndex[] box;
-    private static final double GRAVITY = 0.5; // adjust this value to change the speed of the falling boxes
-    private static final double MIN_VELOCITY = 0.1; // adjust this value to change the minimum velocity of the falling boxes
+    private Timeline timeline;
+    private double[] velocity;
+    private Pane noEventsPane;
+    private AnchorPane mainLevelPane;
+    private ImageView platform;
+    private CollisionWithPlatform collisionWithPlatform;
+    private CollisionWithOtherBox collisionWithOtherBox;
 
-    public BoxesGravity(ImageView[] boxes, int numberOfBoxes) {
+    public BoxesGravity(ImageView[] boxes, int numberOfBoxes, AnchorPane mainLevelPane, ImageView platform) {
         this.boxes = boxes;
         this.numberOfBoxes = numberOfBoxes;
-        mousePressed = new boolean[numberOfBoxes];
-        timelines = new Timeline[numberOfBoxes];
-        box = new ImageViewWithTimelineIndex[numberOfBoxes];
+        this.velocity = new double[numberOfBoxes];
+        this.mainLevelPane = mainLevelPane;
+        noEventsPane = new Pane();
+        noEventsPane.setPrefSize(335, 600);
+        noEventsPane.setLayoutX(0);
+        noEventsPane.setLayoutY(0);
+        mainLevelPane.getChildren().add(noEventsPane);
+        this.platform = platform;
+        this.collisionWithPlatform = new CollisionWithPlatform();
+        this.collisionWithOtherBox = new CollisionWithOtherBox();
     }
 
-
-    public ImageViewWithTimelineIndex[] getImageViewWithTimelineIndexData (){
-        return box;
-    }
     public void start() {
-        for (int i =0; i < numberOfBoxes; i++) {
-            mousePressed[i] = false;
-            box[i] = new ImageViewWithTimelineIndex(i);
-            box[i].setImage(boxes[i].getImage());
-            timelines[i] = new Timeline(new KeyFrame(Duration.millis(10), e -> moveBoxes()));
-            timelines[i].setCycleCount(Timeline.INDEFINITE);
-            timelines[i].play();
+        for (int i = 0; i < numberOfBoxes; i++) {
+            velocity[i] = GRAVITY;
         }
+        timeline = new Timeline(new KeyFrame(Duration.millis(10), e -> moveBoxes()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
-    public void resume(ImageView clickedBox) {
-        if(clickedBox instanceof ImageViewWithTimelineIndex){
-            int timelineIndex = ((ImageViewWithTimelineIndex) clickedBox).getTimelineIndex();
-            timelines[timelineIndex].play();
-        }
-    }
-    public void stop(ImageView clickedBox) {
-        if(clickedBox instanceof ImageViewWithTimelineIndex){
-            int timelineIndex = ((ImageViewWithTimelineIndex) clickedBox).getTimelineIndex();
-            timelines[timelineIndex].stop();
-        }
-    }
-
-
-    public void getMousePressed (boolean mousePressedBool, final int i) {
-        for (int j = 0; j < mousePressed.length; j++) {
-            if (j == i) {
-                mousePressed[j] = mousePressedBool;
-            }
-        }
-    }
-
 
     private void moveBoxes() {
         for (int i = 0; i < numberOfBoxes; i++) {
-            double velocity = GRAVITY;
-            if (boxes[i].getY() < 350) {
-                velocity = -GRAVITY;
+            boxes[i].setY(boxes[i].getY() + velocity[i]);
+            if (collisionWithPlatform.checkCollisionWithPlatform(boxes[i], platform) || collisionWithOtherBox.checkCollisionWithOtherBox(boxes, i)) {
+                velocity[i] = 0;
             }
-            if (mousePressed[i]){
-                System.out.println(mousePressed[i]);
-                stop(boxes[i]);
-                break;
-            }else{
-                boxes[i].setY(boxes[i].getY() + velocity);
-
+            if (collisionWithPlatform.checkCollisionWithPlatform(boxes[i], platform)) {
+                noEventsPane.setVisible(false);
             }
+            int finalI = i;
+            boxes[i].onMousePressedProperty().set((MouseEvent event) -> {
+                velocity[finalI] = 0;
+            }); // stop the falling of the box when the user clicks on it
+            boxes[i].onMouseReleasedProperty().set((MouseEvent event) -> {
+                velocity[finalI] = GRAVITY;
+            }); // start the falling of the box when the user releases the click on it
         }
     }
 }

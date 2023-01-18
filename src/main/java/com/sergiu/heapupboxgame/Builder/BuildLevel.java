@@ -16,21 +16,22 @@ public class BuildLevel extends LevelController {
     private final String platformImagePath;
     private final String boxImagePath;
     private final int numberOfBoxes;
-
-    public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath) {
-        this.platformImagePath = platformImagePath;
-        this.numberOfBoxes = numberOfBoxes;
-        this.boxImagePath = boxImagePath;
-    }
+    private ImageView platformImageView;
 
     private ImageView getPath(String path) throws URISyntaxException {
         Image image = new Image(getClass().getResource(path).toURI().toString());
         ImageView imageView = new ImageView(image);
         return imageView;
     }
+    public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath) throws URISyntaxException {
+        this.platformImagePath = platformImagePath;
+        this.numberOfBoxes = numberOfBoxes;
+        this.boxImagePath = boxImagePath;
+        this.platformImageView = getPath(platformImagePath);
+    }
+
 
     private void PlatformBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
-        ImageView platformImageView = getPath(platformImagePath);
         platformImageView.getStyleClass().add("platform");
         platformImageView.setFitWidth(335);
         platformImageView.setFitHeight(80);
@@ -70,8 +71,7 @@ public class BuildLevel extends LevelController {
             }
             boxes[i] = box;
         }
-
-        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes);
+        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane, platformImageView);
 
         for (ImageView box: boxes) {
             mainLevelPane.getChildren().add(box);

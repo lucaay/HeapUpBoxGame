@@ -124,5 +124,34 @@
             </Button>
          </children>
       </Pane>
+      <Pane fx:id="gameWonPane" layoutX="20.0" layoutY="219.0" prefHeight="200.0" prefWidth="296.0" styleClass="gameWon" stylesheets="@../../css/level.css" visible="false">
+         <children>
+            <Pane layoutX="-20.0" layoutY="-210.0" prefHeight="600.0" prefWidth="335.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="gameWon" width="296.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="64.0" prefWidth="275.0" text="YOU WON!" textAlignment="CENTER" textFill="#ff00fd" wrapText="true">
+               <font>
+                  <Font name="Lucida Console" size="46.0" />
+               </font>
+            </Label>
+            <Button fx:id="retryButton1" layoutX="14.0" layoutY="106.0" mnemonicParsing="false" onAction="#gameOverRetryAction" prefHeight="80.0" prefWidth="99.0" stylesheets="@../../css/level.css" text="RETRY" textAlignment="CENTER">
+               <font>
+                  <Font name="Consolas Bold" size="24.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="retryButton" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Button fx:id="exitButton1" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="106.0" mnemonicParsing="false" onAction="#gameOverExitAction" prefHeight="80.0" prefWidth="99.0" stylesheets="@../../css/level.css" text="HOME" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Consolas Bold" size="24.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="exitButton" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
