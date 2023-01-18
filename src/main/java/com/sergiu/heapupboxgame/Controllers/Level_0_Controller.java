@@ -12,14 +12,17 @@ public class Level_0_Controller extends LevelController {
     @FXML
     private AnchorPane mainLevelPane;
 
-    BuildLevel level = new BuildLevel();
+    private final String platformImagePath = "/com/sergiu/heapupboxgame/level_items/platforms/platform_1.png";
+    private final String boxPath = "/com/sergiu/heapupboxgame/level_items/boxes/box_1.png";
+
     private int numberOfBoxes = 3; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
-    private int timerMaxSeconds = numberOfBoxes * 5; //5 seconds per box
+    private final int timerMaxSeconds = numberOfBoxes * 5; //5 seconds per box
+    BuildLevel level = new BuildLevel(platformImagePath, numberOfBoxes, boxPath);
 
     public void initialize() throws URISyntaxException {
         super.initialize(timerMaxSeconds);
         try {
-            level.createLevel("/com/sergiu/heapupboxgame/level_items/platforms/platform_1.png", "/com/sergiu/heapupboxgame/level_items/boxes/box_1.png", numberOfBoxes, mainLevelPane);
+            level.createLevel(mainLevelPane);
             levelInitialized(true);
         } catch (URISyntaxException e) {
             levelInitialized(false);

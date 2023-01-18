@@ -1,4 +1,4 @@
-.giveUpButton{
+.giveUpButton {
     -fx-background-image: url("../img/buttons/start-button.png");
     -fx-text-fill: white;
     -fx-background-color: transparent;
@@ -8,11 +8,12 @@
     -fx-background-repeat: no-repeat;
 }
 
-.statusBar{
+.statusBar {
     -fx-border-color: transparent;
     -fx-view-order: 5;
 }
-.giveUpConfirmation{
+
+.giveUpConfirmation {
     -fx-background-color: red;
     -fx-background-radius: 10px;
     -fx-view-order: 4;
@@ -24,36 +25,42 @@
     -fx-view-order: 4;
 }
 
-.button{
+.button {
     -fx-background-color: transparent;
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
+
 .yesButton {
     -fx-background-image: url("../img/buttons/yes-button.png");
 }
-.noButton{
+
+.noButton {
     -fx-background-image: url("../img/buttons/no-button.png");
 }
+
 .retryButton {
     -fx-background-image: url("../img/buttons/type-4-level-button.png");
 }
-.exitButton{
+
+.exitButton {
     -fx-background-image: url("../img/buttons/type-1-level-button.png");
 }
-.button:hover{
+
+.button:hover {
     -fx-opacity: 0.85;
     -fx-cursor: hand;
 }
 
-.platform{
+.platform {
     -fx-view-order: 500;
 }
 
-.box{
+.box {
     -fx-view-order: 500;
 }
-.dottedLine{
+
+.dottedLine {
     -fx-view-order: 501;
 }

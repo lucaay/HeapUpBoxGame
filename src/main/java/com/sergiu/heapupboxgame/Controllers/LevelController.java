@@ -2,19 +2,26 @@ package com.sergiu.heapupboxgame.Controllers;
 
 import com.sergiu.heapupboxgame.AudioController;
 import com.sergiu.heapupboxgame.SceneController;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 
 public class LevelController extends SceneController {
+    Timeline timeline = new Timeline();
+    AudioController timerSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/clock-tick.wav");
+    AudioController giveUpSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/giveUp_007.wav");
+    AudioController errorSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/error_001.wav");
+    AudioController confirmationSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
+    AudioController gameOverSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/game_over.wav");
     @FXML
     private URL location;
     @FXML
@@ -28,21 +35,10 @@ public class LevelController extends SceneController {
     @FXML
     private Label noLevelDataLabel;
     private int seconds = 0;
-    Timeline timeline = new Timeline();
-    AudioController timerSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/clock-tick.wav");
-    AudioController giveUpSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/giveUp_007.wav");
-    AudioController errorSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/error_001.wav");
-    AudioController confirmationSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
-    AudioController gameOverSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/game_over.wav");
 
-
-    public void levelInitialized(boolean initialized){
+    public void levelInitialized(boolean initialized) {
         //set of instructions to be executed when the level is initialized (when the level is loaded)
-        if (initialized) {
-            noLevelDataLabel.setVisible(false);
-        }else{
-            noLevelDataLabel.setVisible(true);
-        }
+        noLevelDataLabel.setVisible(!initialized);
     }
 
     @FXML
@@ -62,11 +58,13 @@ public class LevelController extends SceneController {
         giveUpConfirmation.setVisible(true);
         giveUpSound.play();
     }
+
     @FXML
     private void giveUpYesAction(ActionEvent event) throws IOException {
         switchToLevelSelector(event);
         confirmationSound.play();
     }
+
     @FXML
     private void giveUpNoAction(ActionEvent event) throws IOException {
         giveUpConfirmation.setVisible(false);
@@ -92,13 +90,13 @@ public class LevelController extends SceneController {
                 seconds--;
                 String sec = String.format("%02d", seconds);
                 timerLabel.setText(sec);
-                if (seconds >= ((int)(75 * maxSeconds) / 100)) {
+                if (seconds >= ((75 * maxSeconds) / 100)) {
                     timerLabel.setTextFill(Color.rgb(102, 255, 102));
-                } else if (seconds >= ((int)(50 * maxSeconds) / 100)){
+                } else if (seconds >= ((50 * maxSeconds) / 100)) {
                     timerLabel.setTextFill(Color.YELLOW);
-                }else if (seconds >= ((int)(25 * maxSeconds) / 100)) {
+                } else if (seconds >= ((25 * maxSeconds) / 100)) {
                     timerLabel.setTextFill(Color.ORANGE);
-                }else if (seconds == 0) {
+                } else if (seconds == 0) {
                     GameOver();
                     timerLabel.setTextFill(Color.RED);
                 }
@@ -110,8 +108,9 @@ public class LevelController extends SceneController {
 
     @FXML
     private void gameOverRetryAction(ActionEvent event) throws IOException {
-        reloadCurrentScene(event,"/com/sergiu/heapupboxgame/levels/level-0/level-0.fxml");
+        reloadCurrentScene(event, "/com/sergiu/heapupboxgame/levels/level-0/level-0.fxml");
     }
+
     @FXML
     private void gameOverExitAction(ActionEvent event) throws IOException {
         switchToLevelSelector(event);

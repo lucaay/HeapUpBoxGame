@@ -1,6 +1,7 @@
 package com.sergiu.heapupboxgame.Builder;
 
 import com.sergiu.heapupboxgame.Adapter.MouseInput;
+import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
 import com.sergiu.heapupboxgame.Controllers.LevelController;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
@@ -12,32 +13,48 @@ import java.net.URISyntaxException;
 
 public class BuildLevel extends LevelController {
 
-    private void PlatformBuilder (String platformImagePath, AnchorPane anchorPane) throws URISyntaxException {
-        Image platformImage = new Image(getClass().getResource(platformImagePath).toURI().toString());
-        ImageView imageView = new ImageView(platformImage);
-        imageView.getStyleClass().add("platform");
-        imageView.setFitWidth(335);
-        imageView.setFitHeight(80);
-        imageView.setX(0);
-        imageView.setY(520);
-        anchorPane.getChildren().add(imageView);
+    private final String platformImagePath;
+    private final String boxImagePath;
+    private final int numberOfBoxes;
+
+    public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath) {
+        this.platformImagePath = platformImagePath;
+        this.numberOfBoxes = numberOfBoxes;
+        this.boxImagePath = boxImagePath;
     }
-    private void BoxesBuilder (String boxImagePath, int numberOfBoxes,AnchorPane anchorPane) throws URISyntaxException {
+
+    private ImageView getPath(String path) throws URISyntaxException {
+        Image image = new Image(getClass().getResource(path).toURI().toString());
+        ImageView imageView = new ImageView(image);
+        return imageView;
+    }
+
+    private void PlatformBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
+        ImageView platformImageView = getPath(platformImagePath);
+        platformImageView.getStyleClass().add("platform");
+        platformImageView.setFitWidth(335);
+        platformImageView.setFitHeight(80);
+        platformImageView.setX(0);
+        platformImageView.setY(520);
+        mainLevelPane.getChildren().add(platformImageView);
+    }
+
+    private void BoxesBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
         int localNumberOfBoxes = numberOfBoxes;
         // make sure that the number of boxes is between 2 and 5
-        if (numberOfBoxes < 2){
+        if (numberOfBoxes < 2) {
             localNumberOfBoxes = 2;
-        } else if (numberOfBoxes > 5){
+        } else if (numberOfBoxes > 5) {
             localNumberOfBoxes = 5;
         }
 
+        ImageView[] boxes = new ImageView[localNumberOfBoxes];
         for (int i = 0; i < localNumberOfBoxes; i++) {
-            Image boxImage = new Image(getClass().getResource(boxImagePath).toURI().toString());
-            ImageView box = new ImageView(boxImage);
+            ImageView box = getPath(boxImagePath);
             box.getStyleClass().add("box");
             box.setFitWidth(75);
             box.setFitHeight(75);
-            box.setY(445);
+            box.setY(350);
             if (localNumberOfBoxes == 2) {
                 box.setX(50 + i * 150);
             } else if (localNumberOfBoxes == 3) {
@@ -51,11 +68,17 @@ public class BuildLevel extends LevelController {
                     box.setX(2.5);
                 }
             }
-            anchorPane.getChildren().add(box);
+            boxes[i] = box;
+        }
+
+        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes);
+
+        for (ImageView box: boxes) {
+            mainLevelPane.getChildren().add(box);
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    MouseInput mi = new MouseInput(box);
+                    MouseInput mi = new MouseInput(box, boxesGravity);
                     box.addEventHandler(MouseEvent.MOUSE_PRESSED, mi);
                     box.addEventHandler(MouseEvent.MOUSE_DRAGGED, mi);
                     box.addEventHandler(MouseEvent.MOUSE_RELEASED, mi);
@@ -65,31 +88,35 @@ public class BuildLevel extends LevelController {
             });
 
         }
+        boxesGravity.start();
     }
 
-    private void dottedLineBuilder (int numberOfBoxes, AnchorPane anchorPane) throws URISyntaxException {
-        ImageView dottedLine = new ImageView(getClass().getResource("/com/sergiu/heapupboxgame/level_items/dotted_line.png").toURI().toString());
+    private void dottedLineBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
+        ImageView dottedLine = getPath("/com/sergiu/heapupboxgame/level_items/dotted_line.png");
         dottedLine.getStyleClass().add("dottedLine");
         dottedLine.setFitWidth(325);
         dottedLine.setFitHeight(3);
         dottedLine.setX(5);
 
-        final int[] anchorPaneHeight = {0};
+        final int[] mainLevelPaneHeight = {0};
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                anchorPaneHeight[0] = (int) anchorPane.getHeight();
-                dottedLine.setY(anchorPaneHeight[0] - 75 * numberOfBoxes - 80 + 20); // 75 is the height of the box and 20 is the offset of the dotted line and 80 is the height of the platform
-                anchorPane.getChildren().add(dottedLine);
+                mainLevelPaneHeight[0] = (int) mainLevelPane.getHeight();
+                dottedLine.setY(mainLevelPaneHeight[0] - 75 * numberOfBoxes - 80 + 20); // 75 is the height of the box and 20 is the offset of the dotted line and 80 is the height of the platform
+                mainLevelPane.getChildren().add(dottedLine);
             }
         });
     }
 
 
-    public void createLevel(String platformImagePath, String boxImagePath, int numberOfBoxes, AnchorPane anchorPane) throws URISyntaxException {
-        PlatformBuilder(platformImagePath, anchorPane);
-        BoxesBuilder(boxImagePath, numberOfBoxes, anchorPane);
-        dottedLineBuilder(numberOfBoxes, anchorPane);
-
+    public void createLevel(AnchorPane mainLevelPane) throws URISyntaxException {
+        try {
+            PlatformBuilder(mainLevelPane);
+            BoxesBuilder(mainLevelPane);
+            dottedLineBuilder(mainLevelPane);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
