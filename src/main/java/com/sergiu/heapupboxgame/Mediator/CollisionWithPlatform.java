@@ -5,8 +5,11 @@ import javafx.scene.image.ImageView;
 
 public class CollisionWithPlatform {
 
-    public boolean checkCollisionWithPlatform(ImageView box) {
-        boolean collisionWithPlatform = box.getY() == 450; // 450 is the top coordinate of the platform
+    public boolean checkCollisionWithPlatform(ImageView box, ImageView platform) {
+        boolean collisionWithPlatform = false;
+        if (platform.getBoundsInParent().intersects(box.getBoundsInParent())) {
+            collisionWithPlatform = true;
+        }
         return collisionWithPlatform;
     }
 }
