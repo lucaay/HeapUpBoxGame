@@ -1,13 +1,18 @@
 package com.sergiu.heapupboxgame.Controllers;
 
+import com.sergiu.heapupboxgame.Adapter.MouseInput;
 import com.sergiu.heapupboxgame.AudioController;
 import com.sergiu.heapupboxgame.SceneController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -15,7 +20,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 
-public class LevelController extends SceneController {
+public abstract class LevelController extends SceneController {
     Timeline timeline = new Timeline();
     AudioController timerSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/clock-tick.wav");
     AudioController giveUpSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/giveUp_007.wav");
@@ -37,6 +42,8 @@ public class LevelController extends SceneController {
     private Pane gameWonPane;
     @FXML
     private Label noLevelDataLabel;
+    @FXML
+    private AnchorPane mainLevelPane;
     private int seconds = 0;
 
     public void levelInitialized(boolean initialized) {
@@ -129,14 +136,17 @@ public class LevelController extends SceneController {
 
     public void GameWon() {
         timeline.stop();
-        timerLabel.setTextFill(Color.GREEN);
-        gameWonSound.play();
-        gameWonPane.setVisible(true);
-        System.out.println("Game Won");
+        if ((mainLevelPane.getScene() != null) && mainLevelPane.getChildren().contains(timerLabel) && mainLevelPane.getChildren().contains(gameWonPane)) {
+            timerLabel.setTextFill(Color.GREEN);
+            gameWonSound.play();
+            gameWonPane.setVisible(true);
+        }
     }
 
     public void initialize(int timerMaxSeconds) {
         Timer(timerLabel, timerMaxSeconds);
         levelIndicator.setText("Level " + getNumberFromLastPartOfPath(location.toString()));
     }
+
+    public abstract void GameWon(ImageView box, ImageView wonLine);
 }

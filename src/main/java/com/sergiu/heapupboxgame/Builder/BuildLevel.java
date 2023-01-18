@@ -2,7 +2,6 @@ package com.sergiu.heapupboxgame.Builder;
 
 import com.sergiu.heapupboxgame.Adapter.MouseInput;
 import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
-import com.sergiu.heapupboxgame.Controllers.LevelController;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,12 +10,13 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URISyntaxException;
 
-public class BuildLevel extends LevelController {
+public class BuildLevel {
 
     private final String platformImagePath;
     private final String boxImagePath;
     private final int numberOfBoxes;
     private ImageView platformImageView;
+    ImageView dottedLine;
 
     private ImageView getPath(String path) throws URISyntaxException {
         Image image = new Image(getClass().getResource(path).toURI().toString());
@@ -28,6 +28,7 @@ public class BuildLevel extends LevelController {
         this.numberOfBoxes = numberOfBoxes;
         this.boxImagePath = boxImagePath;
         this.platformImageView = getPath(platformImagePath);
+        dottedLine = getPath("/com/sergiu/heapupboxgame/level_items/dotted_line.png");
     }
 
 
@@ -71,7 +72,7 @@ public class BuildLevel extends LevelController {
             }
             boxes[i] = box;
         }
-        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane, platformImageView);
+        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane, platformImageView, dottedLine);
 
         for (ImageView box: boxes) {
             mainLevelPane.getChildren().add(box);
@@ -92,7 +93,6 @@ public class BuildLevel extends LevelController {
     }
 
     private void dottedLineBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
-        ImageView dottedLine = getPath("/com/sergiu/heapupboxgame/level_items/dotted_line.png");
         dottedLine.getStyleClass().add("dottedLine");
         dottedLine.setFitWidth(325);
         dottedLine.setFitHeight(3);

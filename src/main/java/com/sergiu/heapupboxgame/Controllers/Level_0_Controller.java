@@ -2,6 +2,7 @@ package com.sergiu.heapupboxgame.Controllers;
 
 import com.sergiu.heapupboxgame.Builder.BuildLevel;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URISyntaxException;
@@ -30,5 +31,10 @@ public class Level_0_Controller extends LevelController {
         } catch (URISyntaxException e) {
             levelInitialized(false);
         }
+    }
+
+    @Override
+    public void GameWon(ImageView box, ImageView wonLine) {
+
     }
 }
