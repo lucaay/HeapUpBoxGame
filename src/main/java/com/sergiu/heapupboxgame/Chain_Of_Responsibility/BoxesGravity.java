@@ -1,11 +1,12 @@
 package com.sergiu.heapupboxgame.Chain_Of_Responsibility;
 
+import com.sergiu.heapupboxgame.AudioController;
 import com.sergiu.heapupboxgame.Command.WonRequirement;
 import com.sergiu.heapupboxgame.Mediator.CollisionWithOtherBox;
 import com.sergiu.heapupboxgame.Mediator.CollisionWithPlatform;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,9 +27,8 @@ public class BoxesGravity {
     private CollisionWithOtherBox collisionWithOtherBox;
     private WonRequirement wonRequirement;
 
-    private boolean wonBoolean = false;
 
-    public BoxesGravity(ImageView[] boxes, int numberOfBoxes, AnchorPane mainLevelPane, ImageView platform, ImageView wonLine) {
+    public BoxesGravity(ImageView[] boxes, int numberOfBoxes, AnchorPane mainLevelPane, ImageView platform, ImageView wonLine, Label timerLabel, Pane gameWonPane, Timeline timeline, AudioController gameWonSound) {
         this.boxes = boxes;
         this.numberOfBoxes = numberOfBoxes;
         this.velocity = new double[numberOfBoxes];
@@ -41,7 +41,7 @@ public class BoxesGravity {
         this.platform = platform;
         this.collisionWithPlatform = new CollisionWithPlatform();
         this.collisionWithOtherBox = new CollisionWithOtherBox();
-        this.wonRequirement = new WonRequirement();
+        this.wonRequirement = new WonRequirement(timerLabel, gameWonPane, timeline, gameWonSound);
         this.wonLine = wonLine;
     }
 

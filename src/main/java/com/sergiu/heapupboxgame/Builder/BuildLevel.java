@@ -1,12 +1,16 @@
 package com.sergiu.heapupboxgame.Builder;
 
 import com.sergiu.heapupboxgame.Adapter.MouseInput;
+import com.sergiu.heapupboxgame.AudioController;
 import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URISyntaxException;
 
@@ -16,6 +20,10 @@ public class BuildLevel {
     private final String boxImagePath;
     private final int numberOfBoxes;
     private ImageView platformImageView;
+    private Label timerLabel;
+    private Pane gameWonPane;
+    private Timeline timeline;
+    private AudioController gameWonSound;
     ImageView dottedLine;
 
     private ImageView getPath(String path) throws URISyntaxException {
@@ -23,12 +31,16 @@ public class BuildLevel {
         ImageView imageView = new ImageView(image);
         return imageView;
     }
-    public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath) throws URISyntaxException {
+    public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath, Label timerLabel, Pane gameWonPane, Timeline timeline, AudioController gameWonSound) throws URISyntaxException {
         this.platformImagePath = platformImagePath;
         this.numberOfBoxes = numberOfBoxes;
         this.boxImagePath = boxImagePath;
         this.platformImageView = getPath(platformImagePath);
         dottedLine = getPath("/com/sergiu/heapupboxgame/level_items/dotted_line.png");
+        this.timerLabel = timerLabel;
+        this.gameWonPane = gameWonPane;
+        this.timeline = timeline;
+        this.gameWonSound = gameWonSound;
     }
 
 
@@ -72,7 +84,7 @@ public class BuildLevel {
             }
             boxes[i] = box;
         }
-        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane, platformImageView, dottedLine);
+        BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane, platformImageView, dottedLine, timerLabel, gameWonPane, timeline, gameWonSound);
 
         for (ImageView box: boxes) {
             mainLevelPane.getChildren().add(box);
