@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class BoxesGravity {
     private static final double GRAVITY = 3;
     public ImageView[] boxes;
@@ -26,6 +28,7 @@ public class BoxesGravity {
     private CollisionWithPlatform collisionWithPlatform;
     private CollisionWithOtherBox collisionWithOtherBox;
     private WonRequirement wonRequirement;
+    private boolean[] isDragged;
 
 
     public BoxesGravity(ImageView[] boxes, int numberOfBoxes, AnchorPane mainLevelPane, ImageView platform, ImageView wonLine, Label timerLabel, Pane gameWonPane, Timeline timeline, AudioController gameWonSound) {
@@ -43,11 +46,20 @@ public class BoxesGravity {
         this.collisionWithOtherBox = new CollisionWithOtherBox();
         this.wonRequirement = new WonRequirement(timerLabel, gameWonPane, timeline, gameWonSound);
         this.wonLine = wonLine;
+        isDragged = new boolean[numberOfBoxes];
     }
 
+
+    private void setIsDragged(int index, boolean value){
+        isDragged[index] = value;
+    }
+    private boolean getIsDragged(int index){
+        return isDragged[index];
+    }
     public void start() {
         for (int i = 0; i < numberOfBoxes; i++) {
             velocity[i] = GRAVITY;
+            setIsDragged(i, false);
         }
         timeline = new Timeline(new KeyFrame(Duration.millis(10), e -> moveBoxes()));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -59,18 +71,22 @@ public class BoxesGravity {
             boxes[i].setY(boxes[i].getY() + velocity[i]);
             if (collisionWithPlatform.checkCollisionWithPlatform(boxes[i], platform) || collisionWithOtherBox.checkCollisionWithOtherBox(boxes, i)) {
                 velocity[i] = 0;
-                wonRequirement.GameWon(boxes[i], wonLine);
             }
             if (collisionWithPlatform.checkCollisionWithPlatform(boxes[i], platform)) {
                 noEventsPane.setVisible(false);
             }
             int finalI = i;
             boxes[i].onMousePressedProperty().set((MouseEvent event) -> {
+                setIsDragged(finalI, true);
                 velocity[finalI] = 0;
             }); // stop the falling of the box when the user clicks on it
             boxes[i].onMouseReleasedProperty().set((MouseEvent event) -> {
+                setIsDragged(finalI, false);
                 velocity[finalI] = GRAVITY;
             }); // start the falling of the box when the user releases the click on it
+            if (collisionWithOtherBox.checkCollisionWithOtherBox(boxes, finalI) && !getIsDragged(finalI)) {
+                wonRequirement.GameWon(boxes[finalI], wonLine);
+            }
         }
     }
 }
