@@ -68,7 +68,7 @@ public class BuildLevel {
             box.getStyleClass().add("box");
             box.setFitWidth(75);
             box.setFitHeight(75);
-            box.setY(350);
+            box.setY(400);
             if (localNumberOfBoxes == 2) {
                 box.setX(50 + i * 150);
             } else if (localNumberOfBoxes == 3) {
@@ -78,7 +78,7 @@ public class BuildLevel {
             } else if (localNumberOfBoxes == 5) {
                 box.setX(2.5 + i * 85);
                 if (i == (localNumberOfBoxes - 1)) {
-                    box.setY(350);
+                    box.setY(300);
                     box.setX(2.5);
                 }
             }
