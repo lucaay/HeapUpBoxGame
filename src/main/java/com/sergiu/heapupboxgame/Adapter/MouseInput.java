@@ -1,9 +1,7 @@
 package com.sergiu.heapupboxgame.Adapter;
 
 import com.sergiu.heapupboxgame.Chain_Of_Responsibility.BoxesGravity;
-import com.sergiu.heapupboxgame.Chain_Of_Responsibility.ImageViewWithTimelineIndex;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;

@@ -19,18 +19,13 @@ public class BuildLevel {
     private final String platformImagePath;
     private final String boxImagePath;
     private final int numberOfBoxes;
-    private ImageView platformImageView;
-    private Label timerLabel;
-    private Pane gameWonPane;
-    private Timeline timeline;
-    private AudioController gameWonSound;
     ImageView dottedLine;
+    private final ImageView platformImageView;
+    private final Label timerLabel;
+    private final Pane gameWonPane;
+    private final Timeline timeline;
+    private final AudioController gameWonSound;
 
-    private ImageView getPath(String path) throws URISyntaxException {
-        Image image = new Image(getClass().getResource(path).toURI().toString());
-        ImageView imageView = new ImageView(image);
-        return imageView;
-    }
     public BuildLevel(String platformImagePath, int numberOfBoxes, String boxImagePath, Label timerLabel, Pane gameWonPane, Timeline timeline, AudioController gameWonSound) throws URISyntaxException {
         this.platformImagePath = platformImagePath;
         this.numberOfBoxes = numberOfBoxes;
@@ -43,6 +38,11 @@ public class BuildLevel {
         this.gameWonSound = gameWonSound;
     }
 
+    private ImageView getPath(String path) throws URISyntaxException {
+        Image image = new Image(getClass().getResource(path).toURI().toString());
+        ImageView imageView = new ImageView(image);
+        return imageView;
+    }
 
     private void PlatformBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
         platformImageView.getStyleClass().add("platform");
@@ -86,7 +86,7 @@ public class BuildLevel {
         }
         BoxesGravity boxesGravity = new BoxesGravity(boxes, localNumberOfBoxes, mainLevelPane, platformImageView, dottedLine, timerLabel, gameWonPane, timeline, gameWonSound);
 
-        for (ImageView box: boxes) {
+        for (ImageView box : boxes) {
             mainLevelPane.getChildren().add(box);
             Platform.runLater(new Runnable() {
                 @Override

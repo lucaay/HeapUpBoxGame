@@ -1,5 +1,3 @@
-
-
 University project for the Software Engineering course
 
 LIVE DEMO: ---

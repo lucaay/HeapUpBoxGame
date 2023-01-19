@@ -18,6 +18,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class Level_3_Controller extends LevelController {
+    private final String platformImagePath = "/com/sergiu/heapupboxgame/level_items/platforms/platform_1.png";
+    private final String boxPath = "/com/sergiu/heapupboxgame/level_items/boxes/box_1.png";
     //build level here and specific methods for this level
     Timeline timeline = new Timeline();
     AudioController timerSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/clock-tick.wav");
@@ -26,7 +28,7 @@ public class Level_3_Controller extends LevelController {
     AudioController confirmationSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
     AudioController gameOverSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/game_over.wav");
     AudioController gameWonSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/confirmation_001.wav");
-
+    BuildLevel level;
     @FXML
     private AnchorPane mainLevelPane;
     @FXML
@@ -42,12 +44,7 @@ public class Level_3_Controller extends LevelController {
     @FXML
     private Pane gameWonPane;
     private int seconds = 0;
-    BuildLevel level;
-
-    private final String platformImagePath = "/com/sergiu/heapupboxgame/level_items/platforms/platform_1.png";
-    private final String boxPath = "/com/sergiu/heapupboxgame/level_items/boxes/box_1.png";
-
-    private int numberOfBoxes = 5; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
+    private final int numberOfBoxes = 5; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
     private final int timerMaxSeconds = numberOfBoxes * 5; //5 seconds per box
 
     @FXML

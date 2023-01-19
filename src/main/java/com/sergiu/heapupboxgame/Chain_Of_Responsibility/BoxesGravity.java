@@ -13,22 +13,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class BoxesGravity {
     private static final double GRAVITY = 3;
     public ImageView[] boxes;
-    private int numberOfBoxes;
+    private final int numberOfBoxes;
     private Timeline timeline;
-    private double[] velocity;
-    private Pane noEventsPane;
-    private AnchorPane mainLevelPane;
-    private ImageView platform;
-    private ImageView wonLine;
-    private CollisionWithPlatform collisionWithPlatform;
-    private CollisionWithOtherBox collisionWithOtherBox;
-    private WonRequirement wonRequirement;
-    private boolean[] isDragged;
+    private final double[] velocity;
+    private final Pane noEventsPane;
+    private final AnchorPane mainLevelPane;
+    private final ImageView platform;
+    private final ImageView wonLine;
+    private final CollisionWithPlatform collisionWithPlatform;
+    private final CollisionWithOtherBox collisionWithOtherBox;
+    private final WonRequirement wonRequirement;
+    private final boolean[] isDragged;
 
 
     public BoxesGravity(ImageView[] boxes, int numberOfBoxes, AnchorPane mainLevelPane, ImageView platform, ImageView wonLine, Label timerLabel, Pane gameWonPane, Timeline timeline, AudioController gameWonSound) {
@@ -50,12 +48,14 @@ public class BoxesGravity {
     }
 
 
-    private void setIsDragged(int index, boolean value){
+    private void setIsDragged(int index, boolean value) {
         isDragged[index] = value;
     }
-    private boolean getIsDragged(int index){
+
+    private boolean getIsDragged(int index) {
         return isDragged[index];
     }
+
     public void start() {
         for (int i = 0; i < numberOfBoxes; i++) {
             velocity[i] = GRAVITY;

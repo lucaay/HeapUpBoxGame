@@ -6,10 +6,7 @@ import javafx.scene.image.ImageView;
 public class CollisionWithPlatform {
 
     public boolean checkCollisionWithPlatform(ImageView box, ImageView platform) {
-        boolean collisionWithPlatform = false;
-        if (platform.getBoundsInParent().intersects(box.getBoundsInParent())) {
-            collisionWithPlatform = true;
-        }
+        boolean collisionWithPlatform = platform.getBoundsInParent().intersects(box.getBoundsInParent());
         return collisionWithPlatform;
     }
 }
