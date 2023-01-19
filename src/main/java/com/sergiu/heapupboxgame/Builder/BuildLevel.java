@@ -20,7 +20,7 @@ public class BuildLevel {
     private final String boxImagePath;
     private final int numberOfBoxes;
     ImageView dottedLine;
-    private final ImageView platformImageView;
+    final ImageView platformImageView;
     private final Label timerLabel;
     private final Pane gameWonPane;
     private final Timeline timeline;
@@ -44,7 +44,7 @@ public class BuildLevel {
         return imageView;
     }
 
-    private void PlatformBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
+    void PlatformBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
         platformImageView.getStyleClass().add("platform");
         platformImageView.setFitWidth(335);
         platformImageView.setFitHeight(80);
@@ -53,7 +53,7 @@ public class BuildLevel {
         mainLevelPane.getChildren().add(platformImageView);
     }
 
-    private void BoxesBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
+    void BoxesBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
         int localNumberOfBoxes = numberOfBoxes;
         // make sure that the number of boxes is between 2 and 5
         if (numberOfBoxes < 2) {
@@ -104,7 +104,7 @@ public class BuildLevel {
         boxesGravity.start();
     }
 
-    private void dottedLineBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
+    void dottedLineBuilder(AnchorPane mainLevelPane) throws URISyntaxException {
         dottedLine.getStyleClass().add("dottedLine");
         dottedLine.setFitWidth(325);
         dottedLine.setFitHeight(3);
