@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class Level_0_Controller extends LevelController {
+public class Level_1_Controller extends LevelController {
     //build level here and specific methods for this level
     Timeline timeline = new Timeline();
     AudioController timerSound = new AudioController("src/main/resources/com/sergiu/heapupboxgame/sounds/clock-tick.wav");
@@ -47,7 +47,7 @@ public class Level_0_Controller extends LevelController {
     private final String platformImagePath = "/com/sergiu/heapupboxgame/level_items/platforms/platform_1.png";
     private final String boxPath = "/com/sergiu/heapupboxgame/level_items/boxes/box_1.png";
 
-    private int numberOfBoxes = 2; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
+    private int numberOfBoxes = 3; //number of boxes in this level, minimum 2 boxes, maximum 5 boxes
     private final int timerMaxSeconds = numberOfBoxes * 5; //5 seconds per box
 
     @FXML
